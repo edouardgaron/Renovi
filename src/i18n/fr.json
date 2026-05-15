@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "login": "Connexion",
+    "register": "Commencer gratuitement",
+    "dashboard": "Tableau de bord"
+  },
+  "hero": {
+    "badge": "Nouveau en 2025",
+    "title": "Mesurez. Visualisez. Impressionnez.",
+    "subtitle": "La plateforme tout-en-un pour les entrepreneurs en rénovation extérieure au Québec. Générez des mesures précises, visualisez en 3D et impressionnez vos clients avec des rapports professionnels.",
+    "cta_primary": "Commencer gratuitement",
+    "cta_secondary": "Voir la démo",
+    "trusted_by": "Fait confiance par +"
+  },
+  "features": {
+    "title": "Tout ce dont vous avez besoin",
+    "subtitle": "Une suite d'outils puissants conçue pour les professionnels de la rénovation",
+    "measurements": {
+      "title": "Mesures sans visite",
+      "description": "Vos clients prennent des photos guidées de leur maison. Renovi extrait automatiquement les dimensions avec précision."
+    },
+    "visualization": {
+      "title": "Visualisation 3D",
+      "description": "Montrez à vos clients à quoi ressemblera leur maison après les travaux avec notre configurateur 3D interactif."
+    },
+    "reports": {
+      "title": "Rapports professionnels",
+      "description": "Générez des rapports PDF détaillés avec mesures, matériaux et photos en quelques clics."
+    }
+  },
+  "how_it_works": {
+    "title": "Comment ça fonctionne",
+    "subtitle": "Simple pour vous, facile pour vos clients",
+    "steps": {
+      "1": {
+        "title": "Créez le projet",
+        "description": "Ajoutez votre client et créez un projet avec l'adresse de la propriété."
+      },
+      "2": {
+        "title": "Envoyez l'invitation",
+        "description": "Votre client reçoit un lien par courriel pour prendre des photos guidées."
+      },
+      "3": {
+        "title": "Analysez les photos",
+        "description": "Renovi analyse les photos et génère les mesures automatiquement."
+      },
+      "4": {
+        "title": "Présentez le rapport",
+        "description": "Partagez un rapport professionnel avec visualisation 3D et soumission."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bonjour",
+    "stats": {
+      "total_projects": "Projets totaux",
+      "active_projects": "Projets actifs",
+      "total_clients": "Clients",
+      "reports_generated": "Rapports générés",
+      "photos_received": "Photos reçues",
+      "invitations_sent": "Invitations envoyées"
+    },
+    "recent_projects": "Projets récents",
+    "quick_actions": "Actions rapides",
+    "new_project": "Nouveau projet",
+    "new_client": "Nouveau client",
+    "activity": "Activité récente"
+  },
+  "projects": {
+    "title": "Projets",
+    "new_project": "Nouveau projet",
+    "search_placeholder": "Rechercher un projet...",
+    "all_statuses": "Tous les statuts",
+    "no_projects": "Aucun projet trouvé",
+    "create_first": "Créez votre premier projet",
+    "fields": {
+      "name": "Nom du projet",
+      "client": "Client",
+      "address": "Adresse",
+      "city": "Ville",
+      "province": "Province",
+      "postal_code": "Code postal",
+      "building_type": "Type de bâtiment",
+      "notes": "Notes"
+    }
+  },
+  "clients": {
+    "title": "Clients",
+    "new_client": "Nouveau client",
+    "search_placeholder": "Rechercher un client...",
+    "no_clients": "Aucun client trouvé",
+    "fields": {
+      "name": "Nom complet",
+      "email": "Courriel",
+      "phone": "Téléphone",
+      "address": "Adresse",
+      "city": "Ville",
+      "province": "Province",
+      "postal_code": "Code postal",
+      "notes": "Notes"
+    }
+  },
+  "status": {
+    "draft": "Brouillon",
+    "invitation_sent": "Invitation envoyée",
+    "photos_received": "Photos reçues",
+    "analyzing": "En analyse",
+    "report_ready": "Rapport prêt",
+    "completed": "Terminé"
+  },
+  "common": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Succès",
+    "required": "Requis",
+    "optional": "Optionnel",
+    "yes": "Oui",
+    "no": "Non",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "all": "Tous"
+  },
+  "pricing": {
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez le plan qui convient à votre entreprise",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "save": "Économisez 15%",
+    "per_month": "/ mois",
+    "per_year": "/ an",
+    "get_started": "Commencer",
+    "popular": "Populaire",
+    "contact_sales": "Contacter les ventes"
+  },
+  "footer": {
+    "tagline": "La plateforme pour les entrepreneurs en rénovation au Québec",
+    "product": "Produit",
+    "company": "Compagnie",
+    "legal": "Légal",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "rights": "Tous droits réservés"
+  },
+  "auth": {
+    "login_title": "Connexion à Renovi",
+    "login_subtitle": "Accédez à votre tableau de bord",
+    "register_title": "Créer votre compte",
+    "register_subtitle": "Commencez gratuitement, sans carte de crédit",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "company_name": "Nom de l'entreprise",
+    "full_name": "Nom complet",
+    "login_button": "Se connecter",
+    "register_button": "Créer mon compte",
+    "forgot_password": "Mot de passe oublié?",
+    "no_account": "Pas encore de compte?",
+    "have_account": "Déjà un compte?",
+    "sign_up": "S'inscrire",
+    "sign_in": "Se connecter"
+  }
+}

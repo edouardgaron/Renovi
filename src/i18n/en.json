@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "login": "Sign In",
+    "register": "Get Started Free",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "badge": "New in 2025",
+    "title": "Measure. Visualize. Impress.",
+    "subtitle": "The all-in-one platform for exterior renovation contractors in Quebec. Generate precise measurements, visualize in 3D, and impress clients with professional reports.",
+    "cta_primary": "Get Started Free",
+    "cta_secondary": "Watch Demo",
+    "trusted_by": "Trusted by +"
+  },
+  "features": {
+    "title": "Everything You Need",
+    "subtitle": "A powerful suite of tools designed for renovation professionals",
+    "measurements": {
+      "title": "Remote Measurements",
+      "description": "Clients take guided photos of their home. Renovi automatically extracts accurate dimensions."
+    },
+    "visualization": {
+      "title": "3D Visualization",
+      "description": "Show clients what their home will look like after renovation with our interactive 3D configurator."
+    },
+    "reports": {
+      "title": "Professional Reports",
+      "description": "Generate detailed PDF reports with measurements, materials, and photos in just a few clicks."
+    }
+  },
+  "how_it_works": {
+    "title": "How It Works",
+    "subtitle": "Simple for you, easy for your clients",
+    "steps": {
+      "1": {
+        "title": "Create the Project",
+        "description": "Add your client and create a project with the property address."
+      },
+      "2": {
+        "title": "Send the Invitation",
+        "description": "Your client receives a link by email to take guided photos."
+      },
+      "3": {
+        "title": "Analyze the Photos",
+        "description": "Renovi analyzes the photos and generates measurements automatically."
+      },
+      "4": {
+        "title": "Present the Report",
+        "description": "Share a professional report with 3D visualization and quote."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Hello",
+    "stats": {
+      "total_projects": "Total Projects",
+      "active_projects": "Active Projects",
+      "total_clients": "Clients",
+      "reports_generated": "Reports Generated",
+      "photos_received": "Photos Received",
+      "invitations_sent": "Invitations Sent"
+    },
+    "recent_projects": "Recent Projects",
+    "quick_actions": "Quick Actions",
+    "new_project": "New Project",
+    "new_client": "New Client",
+    "activity": "Recent Activity"
+  },
+  "projects": {
+    "title": "Projects",
+    "new_project": "New Project",
+    "search_placeholder": "Search projects...",
+    "all_statuses": "All Statuses",
+    "no_projects": "No projects found",
+    "create_first": "Create your first project",
+    "fields": {
+      "name": "Project Name",
+      "client": "Client",
+      "address": "Address",
+      "city": "City",
+      "province": "Province",
+      "postal_code": "Postal Code",
+      "building_type": "Building Type",
+      "notes": "Notes"
+    }
+  },
+  "clients": {
+    "title": "Clients",
+    "new_client": "New Client",
+    "search_placeholder": "Search clients...",
+    "no_clients": "No clients found",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "province": "Province",
+      "postal_code": "Postal Code",
+      "notes": "Notes"
+    }
+  },
+  "status": {
+    "draft": "Draft",
+    "invitation_sent": "Invitation Sent",
+    "photos_received": "Photos Received",
+    "analyzing": "Analyzing",
+    "report_ready": "Report Ready",
+    "completed": "Completed"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "required": "Required",
+    "optional": "Optional",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All"
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your business",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save": "Save 15%",
+    "per_month": "/ month",
+    "per_year": "/ year",
+    "get_started": "Get Started",
+    "popular": "Popular",
+    "contact_sales": "Contact Sales"
+  },
+  "footer": {
+    "tagline": "The platform for renovation contractors in Quebec",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "All rights reserved"
+  },
+  "auth": {
+    "login_title": "Sign in to Renovi",
+    "login_subtitle": "Access your dashboard",
+    "register_title": "Create your account",
+    "register_subtitle": "Start free, no credit card required",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "company_name": "Company Name",
+    "full_name": "Full Name",
+    "login_button": "Sign In",
+    "register_button": "Create Account",
+    "forgot_password": "Forgot your password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "sign_up": "Sign Up",
+    "sign_in": "Sign In"
+  }
+}
