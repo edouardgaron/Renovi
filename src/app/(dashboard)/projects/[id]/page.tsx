@@ -155,15 +155,12 @@ export default function ProjectDetailPage() {
               {project.status === 'invitation_sent' ? 'Renvoyer l\'invitation' : 'Envoyer invitation'}
             </Button>
           )}
-          <Button
-            variant="outline"
-            size="sm"
-            className="gap-2"
-            onClick={() => setShow3D(true)}
-          >
-            <Box className="w-4 h-4" />
-            Visualisation 3D
-          </Button>
+          <Link href={`/projects/${projectId}/configurateur`}>
+            <Button variant="outline" size="sm" className="gap-2">
+              <Box className="w-4 h-4" />
+              Configurateur 3D
+            </Button>
+          </Link>
           {(project.status === 'report_ready' || project.status === 'completed') && (
             <Button
               className="gap-2 bg-green-600 hover:bg-green-700"
@@ -506,10 +503,12 @@ export default function ProjectDetailPage() {
             )}
 
             <div className="pt-4 border-t border-gray-50">
-              <Button className="bg-[#1B4FDE] hover:bg-[#1640C4] gap-2" onClick={() => setShow3D(true)}>
-                <Box className="w-4 h-4" />
-                Ouvrir le configurateur 3D
-              </Button>
+              <Link href={`/projects/${projectId}/configurateur`}>
+                <Button className="bg-[#1B4FDE] hover:bg-[#1640C4] gap-2">
+                  <Box className="w-4 h-4" />
+                  Ouvrir le configurateur 3D
+                </Button>
+              </Link>
             </div>
           </div>
         </TabsContent>
