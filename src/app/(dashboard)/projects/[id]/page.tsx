@@ -20,6 +20,7 @@ import {
   Download,
   Loader2,
   X,
+  Sparkles,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -155,6 +156,12 @@ export default function ProjectDetailPage() {
               {project.status === 'invitation_sent' ? 'Renvoyer l\'invitation' : 'Envoyer invitation'}
             </Button>
           )}
+          <Link href={`/projects/${projectId}/analyse`}>
+            <Button variant="outline" size="sm" className="gap-2">
+              <Sparkles className="w-4 h-4" />
+              Analyser les photos
+            </Button>
+          </Link>
           <Link href={`/projects/${projectId}/configurateur`}>
             <Button variant="outline" size="sm" className="gap-2">
               <Box className="w-4 h-4" />

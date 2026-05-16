@@ -155,6 +155,17 @@ export const mockProjects: Project[] = [
       perimeter: 42.6,
       confidence_level: 'high',
       notes: 'Mesures calculées avec haute précision à partir de 4 photos.',
+      building_stories: 2,
+      has_garage: false,
+      has_dormer: false,
+      roof_style: 'gable',
+      detected_features: [
+        'Revêtement en vinyle',
+        'Fenêtres à double vitrage',
+        'Porte en acier peint',
+        'Gouttières en aluminium',
+        'Balcon avant avec rampe',
+      ],
     },
     materials: {
       wall_color: '#C8A882',

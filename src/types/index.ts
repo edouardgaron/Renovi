@@ -99,6 +99,11 @@ export interface ProjectMeasurements {
   perimeter: number | null
   confidence_level: 'low' | 'medium' | 'high' | null
   notes: string | null
+  building_stories?: number
+  has_garage?: boolean
+  has_dormer?: boolean
+  roof_style?: 'gable' | 'hip' | 'mansard' | 'flat' | 'gambrel'
+  detected_features?: string[]
 }
 
 export interface ProjectMaterials {

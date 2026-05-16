@@ -7,13 +7,13 @@ import dynamic from 'next/dynamic'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
 import {
-  ArrowLeft, Save, Share2, RotateCcw, ChevronRight,
+  ArrowLeft, Save, Share2, RotateCcw,
   Home, Layers, Square, DoorOpen, Columns, Box,
-  Check, Palette, Download, Eye
+  Check, Palette, Download, Eye, Ruler,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getProjectById } from '@/lib/mock-data'
-import { EXTERIOR_COLOR_PALETTES, MATERIALS } from '@/lib/constants'
+import { EXTERIOR_COLOR_PALETTES } from '@/lib/constants'
 import toast from 'react-hot-toast'
 
 const HouseModel3D = dynamic(() => import('@/components/3d/HouseModel3D'), { ssr: false })
@@ -123,8 +123,53 @@ const BRAND_PALETTES = [
   },
 ]
 
-const ALL_COLORS = [
-  ...EXTERIOR_COLOR_PALETTES.flatMap(p => p.colors),
+// ─── House Styles ─────────────────────────────────────────────────────────────
+
+interface HouseStyle {
+  id: string
+  label: string
+  description: string
+  proportions: {
+    width: number
+    height: number
+    depth: number
+    roofPitch: number
+    hasGarage: boolean
+    hasDoublePitch: boolean
+  }
+}
+
+const HOUSE_STYLES: HouseStyle[] = [
+  {
+    id: 'unifamiliale',
+    label: 'Maison unifamiliale',
+    description: '2 étages, toit à pignon standard',
+    proportions: { width: 1.0, height: 1.0, depth: 1.0, roofPitch: 1.0, hasGarage: false, hasDoublePitch: false },
+  },
+  {
+    id: 'bungalow',
+    label: 'Bungalow',
+    description: '1 étage, toit à faible pente',
+    proportions: { width: 1.2, height: 0.65, depth: 1.1, roofPitch: 0.6, hasGarage: false, hasDoublePitch: false },
+  },
+  {
+    id: 'etages',
+    label: 'Maison à étages',
+    description: '2,5 étages, toiture haute',
+    proportions: { width: 0.9, height: 1.35, depth: 0.9, roofPitch: 1.3, hasGarage: false, hasDoublePitch: false },
+  },
+  {
+    id: 'garage_double',
+    label: 'Maison avec garage double',
+    description: 'Plain-pied avec garage double attenant',
+    proportions: { width: 1.4, height: 0.7, depth: 1.1, roofPitch: 0.65, hasGarage: true, hasDoublePitch: false },
+  },
+  {
+    id: 'cottage',
+    label: 'Cottage',
+    description: 'Cottage 1,5 étages, charme traditionnel',
+    proportions: { width: 0.95, height: 0.95, depth: 0.95, roofPitch: 1.2, hasGarage: false, hasDoublePitch: true },
+  },
 ]
 
 // ─── Scene ────────────────────────────────────────────────────────────────────
@@ -167,8 +212,10 @@ export default function ConfigurateurPage() {
   const [activePart, setActivePart] = useState<PartKey>('wall')
   const [activeMaterial, setActiveMaterial] = useState<string>('vinyl')
   const [activeBrand, setActiveBrand] = useState<string>('SICO')
-  const [tab, setTab] = useState<'couleurs' | 'materiaux'>('couleurs')
+  const [tab, setTab] = useState<'couleurs' | 'materiaux' | 'style'>('couleurs')
   const [saving, setSaving] = useState(false)
+  const [activeStyle, setActiveStyle] = useState<string>('unifamiliale')
+  const [importingMeasurements, setImportingMeasurements] = useState(false)
 
   const applyColor = useCallback((hex: string) => {
     const next = { ...colors, [activePart]: hex }
@@ -211,6 +258,60 @@ export default function ConfigurateurPage() {
     const params = new URLSearchParams(colors as unknown as Record<string, string>)
     navigator.clipboard.writeText(`${window.location.origin}/configurateur?${params}`)
     toast.success('Lien copié dans le presse-papier !')
+  }
+
+  const handleExportImage = () => {
+    // Find the canvas element rendered by R3F
+    const canvas = document.querySelector('canvas')
+    if (!canvas) {
+      toast.error('Canvas introuvable. Réessayez.')
+      return
+    }
+    try {
+      const dataUrl = canvas.toDataURL('image/png')
+      const a = document.createElement('a')
+      a.href = dataUrl
+      a.download = `renovi-config-${project?.name?.toLowerCase().replace(/\s+/g, '-') ?? 'projet'}.png`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      toast.success('Image exportée !')
+    } catch {
+      toast.error('Impossible d\'exporter l\'image (contexte WebGL).')
+    }
+  }
+
+  async function handleImportMeasurements() {
+    if (!project?.measurements) {
+      toast.error('Aucune mesure disponible pour ce projet.')
+      return
+    }
+    setImportingMeasurements(true)
+    await new Promise(r => setTimeout(r, 400))
+
+    const m = project.measurements
+    // Map measurement data to color hints (illustrative)
+    if (m.roof_style === 'flat') {
+      setActiveStyle('bungalow')
+    } else if ((m.building_stories ?? 0) >= 2) {
+      setActiveStyle('etages')
+    } else if (m.has_garage) {
+      setActiveStyle('garage_double')
+    }
+
+    if (project.materials.wall_color) {
+      applyColor(project.materials.wall_color)
+    }
+
+    setImportingMeasurements(false)
+    toast.success(
+      `Mesures importées: ${m.wall_surface ?? '?'} pi² murs, ${m.roof_surface ?? '?'} pi² toiture`
+    )
+  }
+
+  function handleStyleChange(styleId: string) {
+    setActiveStyle(styleId)
+    toast(`Style "${HOUSE_STYLES.find(s => s.id === styleId)?.label}" appliqué`, { duration: 2000 })
   }
 
   const activePalette = BRAND_PALETTES.find(b => b.brand === activeBrand)?.colors ?? []
@@ -264,6 +365,28 @@ export default function ConfigurateurPage() {
             className="text-gray-400 hover:text-white gap-1.5 text-xs"
           >
             Réinitialiser
+          </Button>
+          <Button
+            variant="ghost" size="sm"
+            onClick={handleImportMeasurements}
+            disabled={importingMeasurements}
+            className="text-gray-400 hover:text-white gap-1.5"
+            title="Importer les mesures du projet"
+          >
+            {importingMeasurements ? (
+              <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <Ruler className="w-4 h-4" />
+            )}
+            Mesures
+          </Button>
+          <Button
+            variant="ghost" size="sm"
+            onClick={handleExportImage}
+            className="text-gray-400 hover:text-white gap-1.5"
+          >
+            <Download className="w-4 h-4" />
+            Exporter
           </Button>
           <Button
             variant="ghost" size="sm"
@@ -393,26 +516,19 @@ export default function ConfigurateurPage() {
 
           {/* Tab selector */}
           <div className="flex border-b border-gray-800">
-            <button
-              onClick={() => setTab('couleurs')}
-              className={`flex-1 py-2.5 text-xs font-medium transition-colors ${
-                tab === 'couleurs'
-                  ? 'text-white border-b-2 border-[#1B4FDE]'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
-            >
-              Couleurs
-            </button>
-            <button
-              onClick={() => setTab('materiaux')}
-              className={`flex-1 py-2.5 text-xs font-medium transition-colors ${
-                tab === 'materiaux'
-                  ? 'text-white border-b-2 border-[#1B4FDE]'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
-            >
-              Matériaux
-            </button>
+            {(['couleurs', 'materiaux', 'style'] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`flex-1 py-2.5 text-xs font-medium transition-colors ${
+                  tab === t
+                    ? 'text-white border-b-2 border-[#1B4FDE]'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                {t === 'couleurs' ? 'Couleurs' : t === 'materiaux' ? 'Matériaux' : 'Style'}
+              </button>
+            ))}
           </div>
 
           <div className="flex-1 overflow-y-auto">
@@ -519,7 +635,7 @@ export default function ConfigurateurPage() {
                   </div>
                 </div>
               </div>
-            ) : (
+            ) : tab === 'materiaux' ? (
               /* Materials tab */
               <div className="p-3 space-y-4">
                 <div>
@@ -567,6 +683,69 @@ export default function ConfigurateurPage() {
                     Pour l&apos;instant, la couleur de prévisualisation est utilisée.
                   </p>
                 </div>
+              </div>
+            ) : (
+              /* Style tab */
+              <div className="p-3 space-y-3">
+                <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">
+                  Style architectural
+                </p>
+                {HOUSE_STYLES.map(style => {
+                  const isActive = activeStyle === style.id
+                  return (
+                    <button
+                      key={style.id}
+                      onClick={() => handleStyleChange(style.id)}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${
+                        isActive
+                          ? 'border-[#1B4FDE] bg-[#1B4FDE]/10'
+                          : 'border-gray-800 hover:border-gray-600 bg-gray-800/50'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-xs font-semibold text-white">{style.label}</p>
+                          <p className="text-[10px] text-gray-500 mt-0.5">{style.description}</p>
+                        </div>
+                        {isActive && <Check className="w-4 h-4 text-[#1B4FDE] flex-shrink-0" />}
+                      </div>
+                      {isActive && (
+                        <div className="mt-2 flex gap-2 text-[10px] text-[#6089FA]">
+                          <span>L×{style.proportions.width.toFixed(1)}</span>
+                          <span>H×{style.proportions.height.toFixed(1)}</span>
+                          <span>P×{style.proportions.depth.toFixed(1)}</span>
+                          {style.proportions.hasGarage && <span className="text-green-400">Garage</span>}
+                        </div>
+                      )}
+                    </button>
+                  )
+                })}
+
+                {/* Import from project */}
+                {project?.measurements?.wall_surface && (
+                  <div className="mt-3 p-3 bg-gray-800/50 rounded-xl border border-gray-700">
+                    <p className="text-xs font-medium text-gray-300 mb-2">Mesures du projet</p>
+                    <div className="space-y-1 text-[10px] text-gray-500">
+                      {project.measurements.wall_surface && (
+                        <p>Murs: {project.measurements.wall_surface} pi²</p>
+                      )}
+                      {project.measurements.roof_surface && (
+                        <p>Toiture: {project.measurements.roof_surface} pi²</p>
+                      )}
+                      {project.measurements.facade_width && (
+                        <p>Largeur: {project.measurements.facade_width} pi</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handleImportMeasurements}
+                      disabled={importingMeasurements}
+                      className="mt-2 w-full py-1.5 rounded-lg bg-[#1B4FDE]/20 text-[#6089FA] text-xs font-medium hover:bg-[#1B4FDE]/30 transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Ruler className="w-3 h-3" />
+                      Importer les mesures
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
